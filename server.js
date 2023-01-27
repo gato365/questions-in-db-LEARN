@@ -1,5 +1,8 @@
 // 1. Load Libraries
+require("dotenv").config();
 const express = require('express');
+// Access connection to sequelize
+const sequelize = require('./config/connection')
 const path = require('path');
 
 // 2. Load Local modules
@@ -45,6 +48,8 @@ app.get('*', (req, res) =>
 );
 
 // 9. Create Listener
-app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT}`)
-);
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+      console.log("Listening on http://localhost:" + PORT)
+  });
+});
