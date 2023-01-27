@@ -48,8 +48,8 @@ app.get('*', (req, res) =>
 );
 
 // 9. Create Listener
-sequelize.sync().then(() => {
+// sequelize.sync().then(() => {
   app.listen(PORT, () => {
       console.log("Listening on http://localhost:" + PORT)
   });
-});
+// });

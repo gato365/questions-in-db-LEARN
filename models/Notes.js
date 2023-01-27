@@ -1,0 +1,1 @@
+// Notes Model using Sequelize
