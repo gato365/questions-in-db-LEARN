@@ -2,15 +2,18 @@ from neo4j import GraphDatabase
 import logging
 from neo4j.exceptions import ServiceUnavailable
 
+# The purpose of this application is to demonstrate how to connect to Neo4j with the Python driver and run a simple query.
 class App:
-
+    # The Cypher query to create a friendship between two people and return the names of those people and their friendship
     def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
-
+        
+      # Don't forget to close the driver connection when you are finished with it  
     def close(self):
         # Don't forget to close the driver connection when you are finished with it
         self.driver.close()
-
+        
+        # This function creates a friendship between two people and returns the names of those people and their friendship
     def create_friendship(self, person1_name, person2_name):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
@@ -59,8 +62,8 @@ class App:
 if __name__ == "__main__":
     # Aura queries use an encrypted connection using the "neo4j+s" URI scheme
     uri = "neo4j+s://70242d9c.databases.neo4j.io"
-    user = "<Username for Neo4j Aura instance>"
-    password = "<Password for Neo4j Aura instance>"
+    user = "neo4j"
+    password = "LOooWTLMgOFo-_pcXC0NTaX04T5yjveFS_iNV6-dfAA"
     app = App(uri, user, password)
     app.create_friendship("Alice", "David")
     app.find_person("Alice")
